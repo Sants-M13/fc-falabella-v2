@@ -1,0 +1,26 @@
+# Fullstack Architecture Document: Controle de Inventário - Falabella CO
+
+## Table of Contents
+
+- [Fullstack Architecture Document: Controle de Inventário - Falabella CO](#table-of-contents)
+  - [1. Introdução](./1-introducao.md)
+    - [Template Inicial ou Projeto Existente](./1-introducao.md#template-inicial-ou-projeto-existente)
+    - [Registro de Alterações](./1-introducao.md#registro-de-alteraes)
+  - [2. Arquitetura de Alto Nível](./2-arquitetura-de-alto-nivel.md)
+    - [Resumo Técnico](./2-arquitetura-de-alto-nivel.md#resumo-tcnico)
+    - [Plataforma e Infraestrutura](./2-arquitetura-de-alto-nivel.md#plataforma-e-infraestrutura)
+    - [Estrutura do Repositório: Monorepo](./2-arquitetura-de-alto-nivel.md#estrutura-do-repositrio-monorepo)
+    - [Diagrama da Arquitetura de Alto Nível](./2-arquitetura-de-alto-nivel.md#diagrama-da-arquitetura-de-alto-nvel)
+    - [Princípios Não-Negociáveis da Arquitetura](./2-arquitetura-de-alto-nivel.md#princpios-no-negociveis-da-arquitetura)
+  - [3. Pilha de Tecnologias (Tech Stack)](./3-pilha-de-tecnologias-tech-stack.md)
+  - [4. Modelos de Dados](./4-modelos-de-dados.md)
+  - [5. Especificação da API](./5-especificacao-da-api.md)
+    - [Endpoints de Negócio (Funções Serverless)](./5-especificacao-da-api.md#endpoints-de-negcio-funes-serverless)
+  - [6. Estrutura Unificada do Projeto (Monorepo)](./6-estrutura-unificada-do-projeto-monorepo.md)
+  - [7. Fluxo de Trabalho de Desenvolvimento e Deploy](./7-fluxo-de-trabalho-de-desenvolvimento-e-deploy.md)
+    - [Configuração do Ambiente Local](./7-fluxo-de-trabalho-de-desenvolvimento-e-deploy.md#configurao-do-ambiente-local)
+    - [Comandos de Desenvolvimento](./7-fluxo-de-trabalho-de-desenvolvimento-e-deploy.md#comandos-de-desenvolvimento)
+  - [8. Arquitetura de Deploy (CI/CD)](./8-arquitetura-de-deploy-cicd.md)
+  - [9. Guia Rápido do Desenvolvedor (Prompts para Claude Code)](./9-guia-rapido-do-desenvolvedor-prompts-para-claude-code.md)
+    - [Iniciando a Sessão](./9-guia-rapido-do-desenvolvedor-prompts-para-claude-code.md#iniciando-a-sesso)
+    - [Finalizando a Sessão](./9-guia-rapido-do-desenvolvedor-prompts-para-claude-code.md#finalizando-a-sesso)
