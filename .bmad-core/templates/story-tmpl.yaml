@@ -68,6 +68,20 @@ sections:
     owner: scrum-master
     editors: [scrum-master, dev-agent]
 
+  - id: nfr-ux-requirements
+    title: NFR & UX Requirements
+    instruction: |
+      MANDATORY for UI stories - Specify applicable requirements from PRD and UX docs:
+      - NFRs from PRD that apply to this story (especially NFR1 localization es-CO)
+      - UX principles from docs/ui_ux/ (mobile-first, accessibility WCAG 2.1 AA)
+      - Design system components required (colors, typography, components)
+      - Responsive behavior requirements and breakpoints
+      - Performance targets specific to user type (< 10s for promotora)
+      - Localization requirements (es-CO language, COP currency, DD/MM/YYYY dates)
+    elicit: true
+    owner: scrum-master
+    editors: [scrum-master]
+
   - id: dev-notes
     title: Dev Notes
     instruction: |

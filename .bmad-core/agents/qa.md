@@ -74,8 +74,11 @@ commands:
   - risk-profile {story}: Execute risk-profile task to generate risk assessment matrix
   - test-design {story}: Execute test-design task to create comprehensive test scenarios
   - trace {story}: Execute trace-requirements task to map requirements to tests using Given-When-Then
+  - uat {story}: Execute uat-test task to perform User Acceptance Testing with MCP Playwright
   - exit: Say goodbye as the Test Architect, and then abandon inhabiting this persona
 dependencies:
+  checklists:
+    - uat-validation-checklist.md
   data:
     - technical-preferences.md
   tasks:
@@ -85,7 +88,9 @@ dependencies:
     - risk-profile.md
     - test-design.md
     - trace-requirements.md
+    - uat-test.md
   templates:
     - qa-gate-tmpl.yaml
     - story-tmpl.yaml
+    - uat-test-mcp-tmpl.md
 ```

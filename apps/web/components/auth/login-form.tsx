@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { signIn } from '@/lib/auth';
 
 export function LoginForm() {
@@ -8,19 +9,33 @@ export function LoginForm() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error } = await signIn(email, password);
+    const { data, error } = await signIn(email, password);
     
     if (error) {
       setError(error.message);
-    } else {
-      // Redirect will be handled by middleware
-      window.location.reload();
+      setLoading(false);
+      return;
+    }
+
+    if (data.session) {
+      // Get user profile to determine redirect
+      const { getUserProfile } = await import('@/lib/auth');
+      const profile = await getUserProfile(data.session.user.id);
+      
+      if (profile?.role === 'admin') {
+        router.push('/admin');
+      } else if (profile?.role === 'promotora') {
+        router.push('/promotora');
+      } else {
+        router.push('/');
+      }
     }
     
     setLoading(false);
@@ -30,7 +45,7 @@ export function LoginForm() {
     <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto">
       <div>
         <label htmlFor="email" className="block text-sm font-medium mb-1">
-          Email
+          Correo Electrónico
         </label>
         <input
           id="email"
@@ -44,7 +59,7 @@ export function LoginForm() {
       
       <div>
         <label htmlFor="password" className="block text-sm font-medium mb-1">
-          Password
+          Contraseña
         </label>
         <input
           id="password"
@@ -65,7 +80,7 @@ export function LoginForm() {
         disabled={loading}
         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50"
       >
-        {loading ? 'Signing in...' : 'Sign In'}
+        {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
       </button>
     </form>
   );

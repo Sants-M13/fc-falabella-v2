@@ -69,19 +69,31 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
 
-  // If user is authenticated and trying to access login page
-  if (session && pathname === '/login') {
-    // Get user profile to determine redirect
+  // If user is authenticated, check role-based access
+  if (session) {
+    // Get user profile to check role
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
       .eq('id', session.user.id)
       .single();
 
-    if (profile?.role === 'admin') {
-      return NextResponse.redirect(new URL('/admin', req.url));
-    } else if (profile?.role === 'promotora') {
+    // If trying to access login page, redirect based on role
+    if (pathname === '/login') {
+      if (profile?.role === 'admin') {
+        return NextResponse.redirect(new URL('/admin', req.url));
+      } else if (profile?.role === 'promotora') {
+        return NextResponse.redirect(new URL('/promotora', req.url));
+      }
+    }
+
+    // Role-based access control for protected areas
+    if (pathname.startsWith('/admin') && profile?.role !== 'admin') {
       return NextResponse.redirect(new URL('/promotora', req.url));
+    }
+
+    if (pathname.startsWith('/promotora') && profile?.role !== 'promotora') {
+      return NextResponse.redirect(new URL('/admin', req.url));
     }
   }
 

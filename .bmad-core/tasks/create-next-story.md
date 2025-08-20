@@ -18,7 +18,8 @@ To identify the next logical story based on project progress and epic definition
 
 #### 1.1 Locate Epic Files and Review Existing Stories
 
-- Based on `prdSharded` from config, locate epic files (sharded location/pattern or monolithic PRD sections)
+- MANDATORY: Read `docs/prd/5-epicos-e-historias-de-usuario.md` to understand complete epic structure and story sequence
+- Based on `prdSharded` from config, locate epic files (sharded location/pattern or monolithic PRD sections)  
 - If `devStoryLocation` has story files, load the highest `{epicNum}.{storyNum}.story.md` file
 - **If highest story exists:**
   - Verify status is 'Done'. If not, alert user: "ALERT: Found incomplete story! File: {lastEpicNum}.{lastStoryNum}.story.md Status: [current status] You should fix this story first, but would you like to accept risk & override to create the next story in draft?"
@@ -46,11 +47,21 @@ To identify the next logical story based on project progress and epic definition
 
 #### 3.2 Read Architecture Documents Based on Story Type
 
-**For ALL Stories:** tech-stack.md, unified-project-structure.md, coding-standards.md, testing-strategy.md
+**For ALL Stories:** tech-stack.md, unified-project-structure.md, coding-standards.md, testing-strategy.md, 9-guia-rapido-do-desenvolvedor-prompts-para-claude-code.md
 
 **For Backend/API Stories, additionally:** data-models.md, database-schema.md, backend-architecture.md, rest-api-spec.md, external-apis.md
 
 **For Frontend/UI Stories, additionally:** frontend-architecture.md, components.md, core-workflows.md, data-models.md
+
+**For ALL Stories with UI Components (MANDATORY):** 
+- docs/ui_ux/1-introducao-e-principios-de-ux.md
+- docs/ui_ux/2-arquitetura-da-informacao-ia.md  
+- docs/ui_ux/4-wireframes-e-mockups.md
+- docs/ui_ux/5-biblioteca-de-componentes-design-system.md
+- docs/ui_ux/6-identidade-visual-e-guia-de-estilo.md
+- docs/ui_ux/7-requisitos-de-acessibilidade.md
+- docs/ui_ux/8-estrategia-de-responsividade.md
+- docs/prd/3-objetivos-de-design-da-interface-do-usuario.md
 
 **For Full-Stack Stories:** Read both Backend and Frontend sections above
 
@@ -83,11 +94,16 @@ ALWAYS cite source documents: `[Source: architecture/{filename}.md#{section}]`
   - CRITICAL: This section MUST contain ONLY information extracted from architecture documents. NEVER invent or assume technical details.
   - Include ALL relevant technical details from Steps 2-3, organized by category:
     - **Previous Story Insights**: Key learnings from previous story
+    - **NFR Compliance**: Specific NFRs from PRD that apply to this story (especially NFR1 localization es-CO)
+    - **UX Principles**: Mobile-first approach, accessibility requirements, performance targets [with source references]
+    - **Layout Specifications**: Specific layouts from wireframes (Admin: navigation lateral fixa, Promotora: barra navegação inferior) [with source references]
+    - **Design System**: Required components, styling guidelines, color palette, typography [with source references]
     - **Data Models**: Specific schemas, validation rules, relationships [with source references]
     - **API Specifications**: Endpoint details, request/response formats, auth requirements [with source references]
-    - **Component Specifications**: UI component details, props, state management [with source references]
+    - **Component Specifications**: UI component details, props, state management, responsive behavior [with source references]
     - **File Locations**: Exact paths where new code should be created based on project structure
     - **Testing Requirements**: Specific test cases or strategies from testing-strategy.md
+    - **Development Workflow**: Specific commands and setup from developer guide (Docker, supabase start, vercel dev) [with source references]
     - **Technical Constraints**: Version requirements, performance considerations, security rules
   - Every technical detail MUST include its source reference: `[Source: architecture/{filename}.md#{section}]`
   - If information for a category is not found in the architecture docs, explicitly state: "No specific guidance found in architecture docs"

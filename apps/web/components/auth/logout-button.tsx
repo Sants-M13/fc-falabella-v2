@@ -18,7 +18,7 @@ export function LogoutButton() {
       disabled={loading}
       className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 disabled:opacity-50"
     >
-      {loading ? 'Signing out...' : 'Sign Out'}
+{loading ? 'Cerrando sesión...' : 'Cerrar Sesión'}
     </button>
   );
 }

@@ -7,16 +7,16 @@ export default function AdminPage() {
         <div className="px-4 py-6 sm:px-0">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">
-              Admin Dashboard
+              Panel de Administración
             </h1>
             <LogoutButton />
           </div>
           
           <div className="border-4 border-dashed border-gray-200 rounded-lg p-8">
-            <h2 className="text-xl font-semibold mb-4">Welcome to Admin Panel</h2>
+            <h2 className="text-xl font-semibold mb-4">Bienvenido al Panel de Administración</h2>
             <p className="text-gray-600">
-              This is the admin dashboard where administrators can manage stores, 
-              users, and system settings.
+              Este es el panel de administración donde los administradores pueden gestionar tiendas, 
+              usuarios y configuraciones del sistema.
             </p>
           </div>
         </div>

@@ -1,0 +1,136 @@
+title: "Story Template com NFR Validation Obrigatória"
+description: "Template para stories que inclui validação obrigatória de NFRs"
+version: "2.0"
+mandatory_sections: ["story", "acceptance_criteria", "nfr_validation", "definition_of_done"]
+
+template: |
+  # Story {n}: {title}
+  
+  ## Status
+  {status}
+  
+  ## Story
+  **As a** {user_role},
+  **I want** {functionality},
+  **so that** {business_value}.
+  
+  ## Acceptance Criteria
+  {acceptance_criteria}
+  
+  ## 🚨 NFR Validation (OBRIGATÓRIO)
+  
+  ### NFR1 - Localização es-CO (CRÍTICO)
+  - [ ] **Interface em Espanhol**: Todas as strings da interface em es-CO
+  - [ ] **HTML Lang**: `<html lang="es-CO">` configurado
+  - [ ] **Moeda COP**: Formato $12.345 COP implementado
+  - [ ] **Data DD/MM/YYYY**: Formato colombiano implementado  
+  - [ ] **Fontes com Acentos**: Suporte completo a caracteres españoles
+  - [ ] **Testes de Localização**: UAT inclui validação de idioma
+  
+  ### NFR2 - Responsividade Mobile-First
+  - [ ] **Design Mobile-First**: Interface otimizada para mobile
+  - [ ] **Breakpoints Responsivos**: Funcional em 320px-1920px
+  - [ ] **Touch Targets**: Botões >= 44px em dispositivos móveis
+  - [ ] **Testes Responsivos**: E2E em múltiplas resoluções
+  
+  ### NFR3 - Controle de Acesso
+  - [ ] **RLS Policies**: Implementadas para novas tabelas
+  - [ ] **Role Validation**: Middleware valida papéis corretamente
+  - [ ] **Route Protection**: Rotas protegidas apropriadamente
+  - [ ] **Data Filtering**: Store_id filtering quando aplicável
+  
+  ### Performance & Accessibility
+  - [ ] **Load Time < 3s**: Carregamento inicial otimizado
+  - [ ] **WCAG 2.1 AA**: Padrões de acessibilidade atendidos
+  - [ ] **SEO Básico**: Meta tags e structured data
+  
+  ## Tasks / Subtasks
+  {tasks}
+  
+  ## Definition of Done (ATUALIZADO)
+  
+  **FUNCTIONAL REQUIREMENTS:**
+  - [ ] Todos os Acceptance Criteria implementados e testados
+  - [ ] Code review aprovado por tech lead
+  - [ ] Testes unitários implementados e passando (>80% cobertura)
+  - [ ] Testes E2E implementados para fluxos críticos
+  
+  **NFR REQUIREMENTS (OBRIGATÓRIO):**
+  - [ ] **NFR1 Localização**: 100% validado via checklist QA
+  - [ ] **NFR2 Responsividade**: Testado em mobile/desktop  
+  - [ ] **NFR3 Segurança**: RLS policies e auth validados
+  - [ ] **Performance**: Load time < 3s validado
+  - [ ] **Accessibility**: WCAG 2.1 AA validado
+  
+  **QUALITY ASSURANCE:**
+  - [ ] **QA Code Review**: NFR checklist 100% aprovado
+  - [ ] **UAT Testing**: Incluindo validação de UX/localização
+  - [ ] **Build Pipeline**: npm run build/lint/type-check sem erros
+  - [ ] **Documentation**: README/docs atualizados se aplicável
+  
+  **FINAL APPROVAL:**
+  - [ ] **PO Sign-off**: Product Owner aprovou funcionalidade
+  - [ ] **QA Sign-off**: QA aprovou todos os NFRs
+  - [ ] **Tech Lead Sign-off**: Code quality e architecture aprovados
+  
+  ## Dev Notes
+  {dev_notes}
+  
+  ## NFR Testing Evidence
+  
+  ### Localización Validation:
+  ```yaml
+  browser_lang_check:
+    tool: mcp__playwright__browser_evaluate  
+    function: "() => document.documentElement.lang"
+    expected: "es-CO"
+    
+  interface_language_check:
+    tool: mcp__playwright__browser_snapshot
+    validation: "All interface elements in Spanish"
+    
+  currency_format_check:
+    validation: "COP format: $12.345 COP displayed correctly"
+  ```
+  
+  ### Responsiveness Evidence:
+  ```yaml
+  mobile_viewport_test:
+    viewports: [320, 375, 414, 768, 1024, 1920]
+    validation: "Interface functional at all breakpoints"
+  ```
+  
+  ## Change Log
+  | Date | Version | Description | Author |
+  |------|---------|-------------|--------|
+  | {date} | 1.0 | Initial story creation | {author} |
+  
+  ## QA Agent Integration
+  
+  **Mandatory QA Tasks:**
+  ```yaml
+  qa_code_review:
+    task: execute-checklist
+    checklist: nfr-validation-checklist.md
+    requirement: "100% NFR1 compliance mandatory"
+    
+  qa_uat_validation:
+    task: execute-uat
+    template: uat-localization-tmpl.md
+    requirement: "Spanish interface validation"
+  ```
+  
+  ## Dev Agent Integration
+  
+  **Mandatory Dev Tasks:**
+  ```yaml
+  dev_standards_check:
+    task: validate-coding-standards
+    file: docs/architecture/coding-standards.md
+    focus: "NFR1 localization requirements"
+    
+  dev_tech_stack_check:
+    task: validate-tech-stack
+    file: docs/architecture/3-pilha-de-tecnologias-tech-stack.md
+    focus: "Internationalization requirements section"
+  ```

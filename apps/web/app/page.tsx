@@ -9,7 +9,7 @@ export default function Home() {
             FC Falabella v2
           </h1>
           <p className="text-gray-600 mb-8">
-            Product Management System
+            Sistema de Gestión de Productos
           </p>
         </div>
         
@@ -18,12 +18,12 @@ export default function Home() {
             href="/login"
             className="block w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors"
           >
-            Sign In
+            Iniciar Sesión
           </Link>
           
           <div className="text-sm text-gray-500">
-            <p>Demo Users:</p>
-            <p>Admin: admin@example.com</p>
+            <p>Usuarios de Prueba:</p>
+            <p>Administrador: admin@example.com</p>
             <p>Promotora: promotora@example.com</p>
           </div>
         </div>

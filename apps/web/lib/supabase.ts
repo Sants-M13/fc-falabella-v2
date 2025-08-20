@@ -1,3 +1,4 @@
+import { createBrowserClient } from '@supabase/ssr';
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './database.types';
 
@@ -8,13 +9,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: false,
-  },
-});
+// Browser client for client-side operations
+export const supabase = createBrowserClient<Database>(supabaseUrl, supabaseAnonKey);
 
 // Server-side client with service role key (for admin operations)
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;

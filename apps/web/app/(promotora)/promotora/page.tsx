@@ -7,16 +7,16 @@ export default function PromotoraPage() {
         <div className="px-4 py-6 sm:px-0">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">
-              Promotora Dashboard
+              Panel de Promotora
             </h1>
             <LogoutButton />
           </div>
           
           <div className="border-4 border-dashed border-gray-200 rounded-lg p-8">
-            <h2 className="text-xl font-semibold mb-4">Welcome Promotora</h2>
+            <h2 className="text-xl font-semibold mb-4">Bienvenida Promotora</h2>
             <p className="text-gray-600">
-              This is the promotora dashboard where you can manage your store&apos;s 
-              products, inventory, and view reports.
+              Este es el panel de promotora donde puedes gestionar los productos de tu tienda, 
+              inventario y ver reportes.
             </p>
           </div>
         </div>

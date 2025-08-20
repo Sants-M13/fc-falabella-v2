@@ -112,6 +112,28 @@ Note: We don't need every file listed - just the important ones.]]
 - [ ] Success criteria are defined
 - [ ] Special testing considerations are noted (if applicable)
 
+## 6. NFR & UX COMPLIANCE (UI Stories Only)
+
+[[LLM: For stories with UI components, ensure non-functional requirements and UX principles are addressed:
+
+1. NFRs from PRD are identified and addressed (especially NFR1 localization)
+2. UX principles from docs/ui_ux/ are considered (mobile-first, accessibility)
+3. Design system requirements are specified (components, colors, typography)
+4. Responsive behavior is defined per UX strategy
+5. Localization requirements are explicit (es-CO language, COP currency)
+6. Performance targets are specified per user type]]
+
+- [ ] Applicable NFRs from PRD are identified and addressed (check docs/prd.md for NFR1, NFR2, NFR3)
+- [ ] Epic context is clear (story fits properly in epic sequence from docs/prd/5-epicos-e-historias-de-usuario.md)
+- [ ] UX principles are considered (mobile-first for promotora, accessibility WCAG 2.1 AA)
+- [ ] Layout specifications from wireframes are included (Admin: lateral navigation, Promotora: bottom navigation)
+- [ ] Interface objectives are clear (dense for Admin desktop, minimal for Promotora mobile)
+- [ ] Design system components are specified (colors, typography, shadcn/ui components)
+- [ ] Responsive behavior is defined (breakpoints, mobile-first approach)  
+- [ ] Localization requirements are addressed (es-CO language, COP currency format, DD/MM/YYYY dates)
+- [ ] Development workflow is specified (Docker, supabase start, vercel dev sequence)
+- [ ] Performance targets are specified (< 10s for promotora actions, < 30s for admin analysis)
+
 ## VALIDATION RESULT
 
 [[LLM: FINAL STORY VALIDATION REPORT
@@ -147,6 +169,7 @@ Be pragmatic - perfect documentation doesn't exist, but it must be enough to pro
 | 3. Reference Effectiveness           | _TBD_  |        |
 | 4. Self-Containment Assessment       | _TBD_  |        |
 | 5. Testing Guidance                  | _TBD_  |        |
+| 6. NFR & UX Compliance (UI Stories)  | _TBD_  |        |
 
 **Final Assessment:**
 

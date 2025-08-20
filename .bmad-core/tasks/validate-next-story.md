@@ -43,6 +43,15 @@ To comprehensively validate a story draft before implementation begins, ensuring
 - **Responsive/accessibility**: Are these considerations addressed if required?
 - **Integration points**: Are frontend-backend integration points clear?
 
+### 3.5 NFR and UX Requirements Validation (MANDATORY for UI Stories)
+
+- **NFR compliance**: Are applicable NFRs from PRD addressed (especially NFR1 localization es-CO)?
+- **UX principles**: Are mobile-first and accessibility considerations specified?
+- **Design system**: Are UI components, colors, typography requirements from design system specified?
+- **Responsive strategy**: Is mobile-first approach followed per UX documentation?
+- **Localization requirements**: Is es-CO language requirement explicitly addressed?
+- **Performance targets**: Are UX performance requirements (< 10s for promotora actions) considered?
+
 ### 4. Acceptance Criteria Satisfaction Assessment
 
 - **AC coverage**: Will all acceptance criteria be satisfied by the listed tasks?
@@ -114,6 +123,14 @@ Provide a structured validation report including:
 - Missing security considerations
 - Task sequencing problems
 - Incomplete testing instructions
+
+#### NFR & UX Compliance Issues (CRITICAL for UI Stories)
+
+- Missing NFR considerations (especially NFR1 localization)
+- UX principles violations (mobile-first, accessibility)  
+- Design system requirements gaps
+- Responsive behavior not specified
+- Localization requirements not addressed
 
 #### Nice-to-Have Improvements (Optional Enhancements)
 
