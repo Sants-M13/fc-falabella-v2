@@ -1,7 +1,18 @@
 # 5. Épicos e Histórias de Usuário
 
 ## Épico 1: Fundação do Sistema e Configuração Central
-- **História 1.1**: Configuração do Projeto e Autenticação
+
+### Acceptance Criteria (Epic Level):
+1. MCP-Supabase integration configured and functional
+2. Supabase project created with proper environment setup
+3. Database schema deployed with RLS policies active
+4. Authentication system operational for Admin and Promotora roles
+5. Development environment ready for Stories 1.2-1.4 implementation
+6. Project structure follows monorepo architecture pattern
+7. All foundation infrastructure allows secure multi-role access
+
+### Stories:
+- **História 1.1**: MCP-Supabase Setup and Project Infrastructure
 - **História 1.2**: Gestão de Lojas
 - **História 1.3**: Gestão de Usuários (Promotoras)
 - **História 1.4**: Gestão de Produtos (Catálogo)
