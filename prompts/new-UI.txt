@@ -1,0 +1,91 @@
+Contexto & Objetivo
+Estamos no início do projeto (Next.js com App Router + Tailwind). Queremos uma base de UI sólida, acessível e leve para o usuário promoter (mobile) e espaço para “efeitos bonitos” no admin (desktop). Direção:
+
+Base: shadcn/ui (componentes acessíveis, headless, estilizados com Tailwind).
+
+Efeitos/“wow”: Magic UI em páginas específicas do admin, com animações discretas e otimizadas.
+
+Por que essa escolha (compatibilidade & princípios)
+
+Compatível com nosso stack: React + Next.js App Router + Tailwind.
+
+Estilização: shadcn/ui é “unstyled/headless com Tailwind”, zero CSS-in-JS; Magic UI também nasce no ecossistema Tailwind/React.
+
+Acessibilidade: shadcn/ui usa padrões Radix/WAI-ARIA; Magic UI é complementar (efeitos), mantendo foco em semântica.
+
+Leveza & controle: só usamos os componentes que importarmos; no admin podemos carregar animação sob demanda; no promoter evitamos runtime de animação.
+
+Documentação & comunidade: shadcn/ui tem docs/copypaste fortes; Magic UI tem exemplos prontos que aceleram.
+
+O que esperamos que você faça agora (alto nível)
+
+Desenho de arquitetura de UI
+
+Separar rotas: app/(promoter)/… (ultra leve) e app/(admin)/… (efeitos permitidos).
+
+Definir tema base (tokens Tailwind), estados de foco, tamanhos, tipografia e ícones (lucide-react).
+
+Mapear componentes mínimos para promoter (inputs, listas, botões, barras, modais simples) com shadcn/ui.
+
+Mapear onde Magic UI agrega valor apenas no admin (hero, cards animados em dashboards, seções “marketing”).
+
+Diretrizes de implementação (sem descer no código)
+
+Performance mobile (promoter): JS inicial ≤ 80 KB gzip, LCP ≤ 2,5s, INP < 200ms, CLS < 0,1.
+
+Code-splitting: componentes “wow” com import dinâmico; animações somente em client components do admin.
+
+Animação: usar carregamento sob demanda (ex.: runtime mínimo), respeitar prefers-reduced-motion.
+
+A11y: navegação por teclado, foco visível, rótulos/ARIA, contratos de cor.
+
+Imagens: next/image, AVIF/WebP, tamanhos corretos.
+
+Theming: tokens no Tailwind (cores/spacing/radius), modo escuro opcional depois.
+
+Medição: Lighthouse (mobile), ANALYZE=true next build e relatório de bundle.
+
+I18n: espanhol (es-CO) como padrão de microcopys.
+
+Entregáveis (curto prazo)
+
+1 página de arquitetura UI (rotas, componentes por contexto, tema e guidelines).
+
+Lista priorizada de componentes do promoter (MVP) + “efeitos” candidatos do admin.
+
+Plano de performance (como garantir os budgets acima) e checklist de A11y.
+
+2 protótipos rápidos:
+
+promoter: formulário/fluxo simples com shadcn/ui;
+
+admin: seção com efeito do Magic UI, carregando sob demanda.
+
+Documentação (base para análise)
+
+shadcn/ui: https://ui.shadcn.com
+Magic UI:  https://magicui.design
+Next.js App Router: https://nextjs.org/docs/app
+Tailwind CSS: https://tailwindcss.com/docs
+Acessibilidade (WAI-ARIA/WCAG): https://www.w3.org/WAI/standards-guidelines/
+
+
+Riscos para observar
+
+Overuse de animação no mobile;
+
+Importar pacotes de ícones inteiros (preferir import modular);
+
+Carrosséis/efeitos “on scroll” pesados no promoter;
+
+Inconsistência de tema (tokens mal definidos no início viram retrabalho).
+
+Critérios de sucesso
+
+Promoter chega nos budgets de performance;
+
+Admin tem 1–2 áreas “wow” bem medidas e carregadas sob demanda;
+
+A11y básico aprovado (teclado/foco/contraste) nas duas áreas;
+
+Documentação curta (2–4 páginas) para devs seguirem o padrão.

@@ -1,24 +1,38 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { signOut } from '@/lib/auth';
+import { useState } from 'react'
+import { signOut } from '@/lib/auth'
+import { Button } from '@/components/ui/button'
+import { Loader2, LogOut } from 'lucide-react'
 
 export function LogoutButton() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleLogout = async () => {
-    setLoading(true);
-    await signOut();
-    window.location.href = '/login';
-  };
+    setLoading(true)
+    await signOut()
+    window.location.href = '/login'
+  }
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
       disabled={loading}
-      className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 disabled:opacity-50"
+      variant="outline"
+      size="sm"
+      className="border-falabella-red text-falabella-red hover:bg-falabella-red hover:text-white"
     >
-{loading ? 'Cerrando sesión...' : 'Cerrar Sesión'}
-    </button>
-  );
+      {loading ? (
+        <>
+          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+          Saliendo...
+        </>
+      ) : (
+        <>
+          <LogOut className="h-4 w-4 mr-2" />
+          Cerrar Sesión
+        </>
+      )}
+    </Button>
+  )
 }

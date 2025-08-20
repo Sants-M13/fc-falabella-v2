@@ -68,10 +68,27 @@ const font = Font({
 
 ### 🎨 Padrões de UI/UX
 
-- shadcn/ui components obrigatórios
-- Tailwind CSS para estilização
+**Biblioteca de Componentes Obrigatória:**
+- **shadcn/ui**: Única biblioteca aprovada para componentes base
+- **Magic UI**: Permitido apenas em rotas admin desktop (com lazy loading)
+- **PROIBIDO**: Material-UI, Ant Design, Chakra UI, Bootstrap
+
+**Estilização:**
+- Tailwind CSS para todos os estilos
+- Sistema de tema configurado (cores Falabella)
+- Typography: Inter como fonte padrão
+
+**Performance por Contexto:**
+- **Admin (desktop)**: shadcn/ui + Magic UI permitido
+- **Promotora (mobile)**: APENAS shadcn/ui, zero Magic UI
+- **Shared components**: APENAS shadcn/ui
+
+**Qualidade Visual:**
 - Design mobile-first (promotora é usuário primário)
-- Acessibilidade WCAG 2.1 AA
+- Acessibilidade WCAG 2.1 AA obrigatória
+- Consistência visual com páginas existentes
+
+**Referência completa**: Ver [Governança do Design System](../ui_ux/10-governanca-design-system.md)
 
 ## Definition of Done Expandida
 

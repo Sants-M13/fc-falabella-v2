@@ -1,26 +1,35 @@
-import { LogoutButton } from '@/components/auth/logout-button';
+import { Suspense } from 'react'
+import { DashboardHeader } from '@/components/admin/dashboard-header'
+import { StatsCards } from '@/components/admin/stats-cards'
+import { ActionCards } from '@/components/admin/action-cards'
+import { MagicUIProvider } from '@/lib/magic-ui'
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Panel de Administración
-            </h1>
-            <LogoutButton />
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="container mx-auto py-8 px-4 animate-fade-in">
+        <MagicUIProvider>
+          <Suspense fallback={<div className="h-20 bg-gray-200 rounded animate-pulse" />}>
+            <DashboardHeader />
+          </Suspense>
           
-          <div className="border-4 border-dashed border-gray-200 rounded-lg p-8">
-            <h2 className="text-xl font-semibold mb-4">Bienvenido al Panel de Administración</h2>
-            <p className="text-gray-600">
-              Este es el panel de administración donde los administradores pueden gestionar tiendas, 
-              usuarios y configuraciones del sistema.
+          <Suspense fallback={<div className="h-32 bg-gray-200 rounded animate-pulse mb-8" />}>
+            <StatsCards />
+          </Suspense>
+          
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+              Acciones Rápidas
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Accede a las principales funciones administrativas del sistema
             </p>
+            <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse" />}>
+              <ActionCards />
+            </Suspense>
           </div>
-        </div>
+        </MagicUIProvider>
       </div>
     </div>
-  );
+  )
 }
