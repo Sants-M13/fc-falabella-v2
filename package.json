@@ -1,4 +1,22 @@
 {
+  "name": "fc-falabella-v2",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.4"
+  },
   "dependencies": {
     "glob": "^11.0.3"
   }
