@@ -2,6 +2,7 @@
   "name": "fc-falabella-v2",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "npm@10.9.2",
   "workspaces": [
     "apps/*",
     "packages/*"

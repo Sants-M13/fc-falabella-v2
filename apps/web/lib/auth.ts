@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import type { User } from '@supabase/supabase-js';
+// Remove unused import
 
 export type UserRole = 'admin' | 'promotora';
 
@@ -52,8 +52,8 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
     email: data.email,
     role: data.role as UserRole,
     storeId: data.store_id || undefined,
-    createdAt: data.created_at,
-    updatedAt: data.updated_at,
+    createdAt: data.created_at || '',
+    updatedAt: data.updated_at || '',
   };
 }
 

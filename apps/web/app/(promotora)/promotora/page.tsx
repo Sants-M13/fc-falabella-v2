@@ -15,7 +15,7 @@ export default function PromotoraPage() {
           <div className="border-4 border-dashed border-gray-200 rounded-lg p-8">
             <h2 className="text-xl font-semibold mb-4">Welcome Promotora</h2>
             <p className="text-gray-600">
-              This is the promotora dashboard where you can manage your store's 
+              This is the promotora dashboard where you can manage your store&apos;s 
               products, inventory, and view reports.
             </p>
           </div>
