@@ -7,33 +7,46 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "13.0.4"
   }
   public: {
     Tables: {
+      products: {
+        Row: {
+          brand: string
+          cost: number
+          created_at: string | null
+          id: string
+          price: number
+          sku_parent: string
+          style: string
+          updated_at: string | null
+        }
+        Insert: {
+          brand: string
+          cost: number
+          created_at?: string | null
+          id?: string
+          price: number
+          sku_parent: string
+          style: string
+          updated_at?: string | null
+        }
+        Update: {
+          brand?: string
+          cost?: number
+          created_at?: string | null
+          id?: string
+          price?: number
+          sku_parent?: string
+          style?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -98,6 +111,41 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      variants: {
+        Row: {
+          created_at: string | null
+          id: string
+          product_id: string
+          size: string
+          sku_child: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          product_id: string
+          size: string
+          sku_child: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          product_id?: string
+          size?: string
+          sku_child?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "variants_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

@@ -30,6 +30,12 @@ const actions = [
     href: "/admin/users"
   },
   {
+    title: "Gestión de Productos",
+    description: "Administrar catálogo de productos y variantes",
+    icon: Package,
+    href: "/admin/products"
+  },
+  {
     title: "Inventario",
     description: "Supervisar productos y stock en tiempo real",
     icon: Package,

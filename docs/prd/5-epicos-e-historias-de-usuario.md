@@ -7,7 +7,7 @@
 2. Supabase project created with proper environment setup
 3. Database schema deployed with RLS policies active
 4. Authentication system operational for Admin and Promotora roles
-5. Development environment ready for Stories 1.2-1.4 implementation
+5. Development environment ready for Stories 1.2-1.5 implementation
 6. Project structure follows monorepo architecture pattern
 7. All foundation infrastructure allows secure multi-role access
 
@@ -16,6 +16,7 @@
 - **História 1.2**: Gestão de Lojas
 - **História 1.3**: Gestão de Usuários (Promotoras)
 - **História 1.4**: Gestão de Produtos (Catálogo)
+- **História 1.5**: Melhorias no Sistema de Produtos - Curvas de Tamanho e Funcionalidades Avançadas
 
 ## Épico 2: Gestão de Inventário e Movimentações
 - **História 2.1**: Estrutura e Login do Web App da Promotora

@@ -73,7 +73,8 @@
       "Bash(timeout 30 npm run test -- --run delete-store-dialog.test.tsx)",
       "Bash(git branch:*)",
       "Bash(npm run lint:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(Remove-Item \"C:\\apps\\fc-falabella-v2\\setup-agente-aliases.ps1\" -Force -ErrorAction SilentlyContinue)"
     ],
     "deny": [],
     "ask": [],
