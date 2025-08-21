@@ -1,6 +1,7 @@
 "use client"
 
 import { Suspense } from 'react'
+import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BorderBeam, ShimmerButton } from '@/lib/magic-ui'
@@ -19,7 +20,7 @@ const actions = [
     title: "Gestionar Tiendas",
     description: "Administrar ubicaciones y configuraciones de tiendas",
     icon: Store,
-    href: "/admin/tiendas",
+    href: "/admin/stores",
     highlight: true
   },
   {
@@ -80,23 +81,29 @@ export function ActionCards() {
           <CardContent>
             {action.highlight ? (
               <Suspense fallback={
-                <Button className="w-full bg-falabella-red hover:bg-falabella-darkRed">
+                <Link href={action.href}>
+                  <Button className="w-full bg-falabella-red hover:bg-falabella-darkRed">
+                    Acceder
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              }>
+                <Link href={action.href}>
+                  <ShimmerButton className="w-full bg-falabella-red hover:bg-falabella-darkRed">
+                    <span className="flex items-center justify-center">
+                      Acceder
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </span>
+                  </ShimmerButton>
+                </Link>
+              </Suspense>
+            ) : (
+              <Link href={action.href}>
+                <Button variant="outline" className="w-full group-hover:bg-muted">
                   Acceder
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-              }>
-                <ShimmerButton className="w-full bg-falabella-red hover:bg-falabella-darkRed">
-                  <span className="flex items-center justify-center">
-                    Acceder
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </span>
-                </ShimmerButton>
-              </Suspense>
-            ) : (
-              <Button variant="outline" className="w-full group-hover:bg-muted">
-                Acceder
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              </Link>
             )}
           </CardContent>
         </Card>
