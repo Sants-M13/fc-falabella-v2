@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import {
   Breadcrumb,
@@ -10,9 +11,9 @@ import {
 } from '@/components/ui/breadcrumb'
 
 // Mock Next.js components
-jest.mock('next/link', () => {
-  return ({ children }: { children: React.ReactNode }) => <>{children}</>
-})
+vi.mock('next/link', () => ({
+  default: ({ children }: { children: React.ReactNode }) => <>{children}</>
+}))
 
 describe('Breadcrumb Components', () => {
   describe('Breadcrumb', () => {

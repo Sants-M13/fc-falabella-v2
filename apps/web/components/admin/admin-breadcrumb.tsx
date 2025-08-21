@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import React from 'react'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -25,20 +26,20 @@ export function AdminBreadcrumb({ items }: AdminBreadcrumbProps) {
     <Breadcrumb className="mb-6">
       <BreadcrumbList>
         {items.map((item, index) => (
-          <BreadcrumbItem key={index}>
-            {item.current ? (
-              <BreadcrumbPage>{item.label}</BreadcrumbPage>
-            ) : (
-              <>
+          <React.Fragment key={index}>
+            <BreadcrumbItem>
+              {item.current ? (
+                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+              ) : (
                 <BreadcrumbLink asChild>
                   <Link href={item.href || '#'}>
                     {item.label}
                   </Link>
                 </BreadcrumbLink>
-                {index < items.length - 1 && <BreadcrumbSeparator />}
-              </>
-            )}
-          </BreadcrumbItem>
+              )}
+            </BreadcrumbItem>
+            {index < items.length - 1 && <BreadcrumbSeparator />}
+          </React.Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>
