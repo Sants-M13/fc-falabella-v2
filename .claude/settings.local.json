@@ -67,12 +67,20 @@
       "WebFetch(domain:magicui.design)",
       "WebSearch",
       "mcp__ide__getDiagnostics",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(timeout 30 npm run test -- --run stores-list.test.tsx)",
+      "Bash(timeout 30 npm run test -- --run store-form.test.tsx)",
+      "Bash(timeout 30 npm run test -- --run delete-store-dialog.test.tsx)",
+      "Bash(git branch:*)",
+      "Bash(npm run lint:*)",
+      "Bash(timeout:*)"
     ],
     "deny": [],
     "ask": [],
     "additionalDirectories": [
-      "C:\\apps"
+      "C:\\apps",
+      "C:\\c\\apps\\fc-falabella-v2\\apps",
+      "C:\\c\\apps"
     ]
   },
   "enableAllProjectMcpServers": true,

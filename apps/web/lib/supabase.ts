@@ -1,5 +1,4 @@
 import { createBrowserClient } from '@supabase/ssr';
-import { createClient } from '@supabase/supabase-js';
 import type { Database } from './database.types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -12,22 +11,5 @@ if (!supabaseUrl || !supabaseAnonKey) {
 // Browser client for client-side operations
 export const supabase = createBrowserClient<Database>(supabaseUrl, supabaseAnonKey);
 
-// Server-side client with service role key (for admin operations)
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-if (!supabaseServiceRoleKey) {
-  console.warn('SUPABASE_SERVICE_ROLE_KEY not found, admin client will not be available');
-}
-
-export const supabaseAdmin = supabaseServiceRoleKey 
-  ? createClient<Database>(
-      supabaseUrl,
-      supabaseServiceRoleKey,
-      {
-        auth: {
-          autoRefreshToken: false,
-          persistSession: false,
-        },
-      }
-    )
-  : null;
+// Note: For admin operations, use server actions in /lib/actions/users.ts
+// The service role key is only available on the server side for security reasons

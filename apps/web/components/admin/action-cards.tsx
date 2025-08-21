@@ -27,7 +27,7 @@ const actions = [
     title: "Control de Usuarios",
     description: "Gestionar promotoras y permisos de acceso",
     icon: Users,
-    href: "/admin/usuarios"
+    href: "/admin/users"
   },
   {
     title: "Inventario",

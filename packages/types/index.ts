@@ -9,6 +9,33 @@ export interface User {
   updatedAt: Date;
 }
 
+export interface Profile {
+  id: string;
+  email: string;
+  role: UserRole;
+  store_id: string | null;
+  created_at: string;
+  updated_at: string;
+  stores?: Store;
+}
+
+export interface ProfileWithStore extends Omit<Profile, 'stores'> {
+  stores: Store | null;
+}
+
+export interface ProfileInput {
+  email: string;
+  role: UserRole;
+  store_id?: string | null;
+  password?: string;
+}
+
+export interface ProfileUpdate {
+  email?: string;
+  role?: UserRole;
+  store_id?: string | null;
+}
+
 export interface Store {
   id: string;
   name: string;

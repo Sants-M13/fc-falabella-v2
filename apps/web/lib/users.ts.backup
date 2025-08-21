@@ -1,0 +1,277 @@
+import { supabase } from '@/lib/supabase';
+import { ProfileInput, ProfileUpdate, ProfileWithStore } from '@/../../packages/types';
+import { CreateUserInput, UpdateUserInput } from '@/lib/validations/users';
+
+export async function getUsers() {
+  
+  const { data, error } = await supabase
+    .from('profiles')
+    .select(`
+      *,
+      stores (
+        id,
+        name
+      )
+    `)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching users:', error);
+    throw new Error('Error al obtener usuarios');
+  }
+
+  return data as ProfileWithStore[];
+}
+
+export async function getUserById(id: string) {
+  
+  const { data, error } = await supabase
+    .from('profiles')
+    .select(`
+      *,
+      stores (
+        id,
+        name
+      )
+    `)
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    console.error('Error fetching user:', error);
+    throw new Error('Error al obtener usuario');
+  }
+
+  return data as ProfileWithStore;
+}
+
+export async function createUser(input: CreateUserInput) {
+  if (!supabaseAdmin) {
+    throw new Error('Servicio de administración no disponible');
+  }
+  
+  // Validate admin role for this operation
+  const { data: { user: currentUser } } = await supabase.auth.getUser();
+  if (!currentUser) {
+    throw new Error('No autorizado');
+  }
+  
+  const { data: currentProfile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', currentUser.id)
+    .single();
+  
+  if (currentProfile?.role !== 'admin') {
+    throw new Error('Solo los administradores pueden crear usuarios');
+  }
+  
+  // Create auth user
+  const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
+    email: input.email,
+    password: input.password,
+    email_confirm: true,
+    user_metadata: {
+      role: input.role
+    }
+  });
+
+  if (authError) {
+    console.error('Error creating auth user:', authError);
+    if (authError.message?.includes('already registered')) {
+      throw new Error('Este correo electrónico ya está registrado');
+    }
+    throw new Error('Error al crear usuario');
+  }
+
+  // Create profile
+  const profileData: ProfileInput = {
+    email: input.email,
+    role: input.role,
+    store_id: input.store_id || null,
+  };
+
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .insert({
+      id: authData.user.id,
+      ...profileData
+    })
+    .select(`
+      *,
+      stores (
+        id,
+        name
+      )
+    `)
+    .single();
+
+  if (profileError) {
+    console.error('Error creating profile:', profileError);
+    // Try to delete the auth user if profile creation fails
+    await supabaseAdmin.auth.admin.deleteUser(authData.user.id);
+    throw new Error('Error al crear perfil de usuario');
+  }
+
+  return profile as ProfileWithStore;
+}
+
+export async function updateUser(id: string, input: UpdateUserInput) {
+  if (!supabaseAdmin) {
+    throw new Error('Servicio de administración no disponible');
+  }
+  
+  // Validate admin role for this operation
+  const { data: { user: currentUser } } = await supabase.auth.getUser();
+  if (!currentUser) {
+    throw new Error('No autorizado');
+  }
+  
+  const { data: currentProfile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', currentUser.id)
+    .single();
+  
+  if (currentProfile?.role !== 'admin') {
+    throw new Error('Solo los administradores pueden actualizar usuarios');
+  }
+  
+  // Update email in auth if provided
+  if (input.email) {
+    const { error: authError } = await supabaseAdmin.auth.admin.updateUserById(
+      id,
+      { email: input.email }
+    );
+    
+    if (authError) {
+      console.error('Error updating auth user:', authError);
+      if (authError.message?.includes('already registered')) {
+        throw new Error('Este correo electrónico ya está registrado');
+      }
+      throw new Error('Error al actualizar correo electrónico');
+    }
+  }
+  
+  // Update profile
+  const updateData: ProfileUpdate = {};
+  if (input.email) updateData.email = input.email;
+  if (input.role) updateData.role = input.role;
+  if (input.store_id !== undefined) updateData.store_id = input.store_id;
+  
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .update(updateData)
+    .eq('id', id)
+    .select(`
+      *,
+      stores (
+        id,
+        name
+      )
+    `)
+    .single();
+
+  if (profileError) {
+    console.error('Error updating profile:', profileError);
+    throw new Error('Error al actualizar usuario');
+  }
+
+  return profile as ProfileWithStore;
+}
+
+export async function deleteUser(id: string) {
+  if (!supabaseAdmin) {
+    throw new Error('Servicio de administración no disponible');
+  }
+  
+  // Validate admin role for this operation
+  const { data: { user: currentUser } } = await supabase.auth.getUser();
+  if (!currentUser) {
+    throw new Error('No autorizado');
+  }
+  
+  const { data: currentProfile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', currentUser.id)
+    .single();
+  
+  if (currentProfile?.role !== 'admin') {
+    throw new Error('Solo los administradores pueden eliminar usuarios');
+  }
+  
+  // Check if user has transaction history (placeholder - will be implemented when transactions table exists)
+  // For now, we'll just proceed with deletion
+  
+  // Delete profile first (due to foreign key constraint)
+  const { error: profileError } = await supabase
+    .from('profiles')
+    .delete()
+    .eq('id', id);
+  
+  if (profileError) {
+    console.error('Error deleting profile:', profileError);
+    throw new Error('Error al eliminar perfil de usuario');
+  }
+  
+  // Delete auth user
+  const { error: authError } = await supabaseAdmin.auth.admin.deleteUser(id);
+  
+  if (authError) {
+    console.error('Error deleting auth user:', authError);
+    throw new Error('Error al eliminar usuario de autenticación');
+  }
+  
+  return { success: true };
+}
+
+export async function resetUserPassword(email: string) {
+  // Validate admin role for this operation
+  const { data: { user: currentUser } } = await supabase.auth.getUser();
+  if (!currentUser) {
+    throw new Error('No autorizado');
+  }
+  
+  const { data: currentProfile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', currentUser.id)
+    .single();
+  
+  if (currentProfile?.role !== 'admin') {
+    throw new Error('Solo los administradores pueden restablecer contraseñas');
+  }
+  
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/reset-password`,
+  });
+  
+  if (error) {
+    console.error('Error resetting password:', error);
+    throw new Error('Error al enviar correo de restablecimiento de contraseña');
+  }
+  
+  return { success: true };
+}
+
+export async function checkEmailUniqueness(email: string, excludeId?: string) {
+  
+  let query = supabase
+    .from('profiles')
+    .select('id')
+    .eq('email', email);
+  
+  if (excludeId) {
+    query = query.neq('id', excludeId);
+  }
+  
+  const { data, error } = await query;
+  
+  if (error) {
+    console.error('Error checking email uniqueness:', error);
+    throw new Error('Error al verificar correo electrónico');
+  }
+  
+  return data.length === 0;
+}

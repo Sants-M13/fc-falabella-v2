@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2, Mail, Lock } from 'lucide-react'
+import { Loader2, Mail, Lock, Users } from 'lucide-react'
 
 export function LoginForm() {
   const [email, setEmail] = useState('')
@@ -47,8 +47,28 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-4">
+    <div className="space-y-6">
+      <div className="bg-muted/30 border border-border rounded-lg p-4">
+        <div className="flex items-center gap-2 mb-3">
+          <Users className="h-4 w-4 text-muted-foreground" />
+          <h3 className="text-sm font-medium text-muted-foreground">Usuarios de Prueba</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div className="space-y-1">
+            <p className="font-medium text-foreground">Administrador</p>
+            <p className="text-muted-foreground">admin@teste.com</p>
+            <p className="text-muted-foreground">teste123</p>
+          </div>
+          <div className="space-y-1">
+            <p className="font-medium text-foreground">Promotora</p>
+            <p className="text-muted-foreground">promotora@teste.com</p>
+            <p className="text-muted-foreground">teste123</p>
+          </div>
+        </div>
+      </div>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-sm font-medium">
             Correo Electrónico
@@ -108,6 +128,7 @@ export function LoginForm() {
           'Iniciar Sesión'
         )}
       </Button>
-    </form>
+      </form>
+    </div>
   )
 }

@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { StoreDialog } from '@/components/admin/stores/store-dialog'
 import { DeleteStoreDialog } from '@/components/admin/stores/delete-store-dialog'
+import { AdminBreadcrumb } from '@/components/admin/admin-breadcrumb'
 import type { Store } from '@/../../packages/types'
 
 export default function StoresPage() {
@@ -76,8 +77,16 @@ export default function StoresPage() {
     )
   }
 
+  const breadcrumbItems = [
+    { label: 'Panel', href: '/admin' },
+    { label: 'Gestión de Tiendas', current: true },
+  ];
+
   return (
     <div className="p-6 space-y-6">
+      {/* Breadcrumb */}
+      <AdminBreadcrumb items={breadcrumbItems} />
+      
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
